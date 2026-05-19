@@ -1,0 +1,23 @@
+services:
+  frontend:
+    image: ${FRONTEND_IMAGE:-adrianes-ui:latest}
+    build:
+      context: .
+      args:
+        - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+        - PORT=${PORT:-4000}
+    container_name: adrianes-ui
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - PORT=${PORT:-4000}
+    ports:
+      - "${PORT:-4000}:${PORT:-4000}"
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    name: adrianes_shared_network
+    external: true

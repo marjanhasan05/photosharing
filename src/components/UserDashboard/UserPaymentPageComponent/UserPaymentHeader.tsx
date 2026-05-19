@@ -1,0 +1,59 @@
+import { useTranslation } from "react-i18next";
+
+export default function UserPaymentHeader({ summary }: any) {
+  const { t } = useTranslation();
+  console.log(summary);
+  return (
+    <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4  mt-6 mb-6 pb-4">
+        {/* Card 1 */}
+        <div className="p-[1px] rounded-[16px] bg-[linear-gradient(90deg,#8B5CF6_0%,#EC4899_50.48%,#F97316_100%)]">
+          <div className="rounded-[16px] p-4 sm:p-8 flex items-center gap-4 bg-white shadow-[0_4px_33.1px_0_rgba(0,0,0,0.04)]">
+            <div>
+              <p className="text-sm sm:text-base font-lora text-[#7E8086] font-medium tracking-wide">
+                {t("total_paid")}
+              </p>
+              <p className="text-2xl sm:text-3xl font-medium font-lora mt-1 sm:mt-2 text-gray-900 leading-tight">
+                {summary?.totalPaid?.toFixed(2) || "0.00"} {t("currency_sign")}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 2 */}
+        <div className="p-[1px] rounded-[16px] bg-[linear-gradient(90deg,#8B5CF6_0%,#EC4899_50.48%,#F97316_100%)]">
+          <div className="rounded-[16px] p-4 sm:p-8 flex items-center gap-4 bg-white shadow-[0_4px_33.1px_0_rgba(0,0,0,0.04)]">
+            <div>
+              <p className="text-sm sm:text-base font-lora text-[#7E8086] font-medium tracking-wide">
+                {t("total_event")}
+              </p>
+              <p className="text-2xl sm:text-3xl font-medium font-lora mt-1 sm:mt-2 text-gray-900 leading-tight">
+                {summary?.totalEvent || 0}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 3 */}
+        <div className="p-[1px] rounded-[16px] bg-[linear-gradient(90deg,#8B5CF6_0%,#EC4899_50.48%,#F97316_100%)]">
+          <div className="rounded-[16px] p-4 sm:p-8 flex items-center gap-4 bg-white shadow-[0_4px_33.1px_0_rgba(0,0,0,0.04)]">
+            {/* 🔥 FIX: add w-full here */}
+            <div className="w-full">
+              <div className="flex items-center justify-between w-full ">
+                <p className="text-sm sm:text-base font-lora text-[#7E8086] font-medium tracking-wide">
+                  {t("average_cost")}
+                </p>
+              </div>
+
+              <p className="text-2xl sm:text-3xl font-medium font-lora mt-1 sm:mt-2 text-gray-900 leading-tight">
+                {summary?.averageCost
+                  ? Number(summary.averageCost).toFixed(2)
+                  : "0"}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
